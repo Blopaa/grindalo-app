@@ -1,0 +1,19 @@
+.inputs__{
+    &auth{
+        border-radius: 10px;
+        background-color: $white;
+        border: none;
+        outline: none;
+        height: 100%;
+        width: 100%;
+        min-width: 250px;
+        min-height: 50px;
+
+        &:focus{
+            background-color: darken($color: $white, $amount: 10);
+        }
+        &:hover{
+            background-color: darken($color: $white, $amount: 10);
+        }
+    }
+}

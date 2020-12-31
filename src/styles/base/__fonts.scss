@@ -12,14 +12,19 @@
   font-style: normal;
 }
 
-@mixin themable($theme-name, $fsize, $lheight, $fontFamily) {
+@mixin themable($theme-name, $fsize, $lheight, $fontFamily, $color) {
   .#{$theme-name} {
     font-size: $fsize;
     line-height: $lheight;
     font-family: $fontFamily;
     text-align: center;
+    color: $color;
   }
 }
 
+.bold{
+    font-weight: bold;
+}
 
-@include themable(defaultFont, 1rem, 1rem, Roboto)
+
+@include themable(defaultFont, 1rem, 1rem, Roboto, $secondary)

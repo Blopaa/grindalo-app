@@ -1,3 +1,6 @@
-@import 'base/_fonts';
 @import 'base/_colors';
+@import 'base/_fonts';
 @import 'base/_base';
+
+//components
+@import 'components/atoms/Inputs/index.scss'

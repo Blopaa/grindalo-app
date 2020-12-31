@@ -1,26 +1,31 @@
-import React from 'react'
-import useInput from '../../../hooks/useInput'
+import React from 'react';
+import useInput from '../../../hooks/useInput';
 
 type InputProps = {
-    type: "auth";
-    nameAndValue: string;
-}
+  type: 'auth';
+  nameAndValue: string;
+};
 
-const Input: React.FC<InputProps> = ({type}) => {
+const Input: React.FC<InputProps> = ({ type }) => {
+  const [state, handleChange] = useInput({
+    values: '',
+  });
 
-    const [state, handleChange] = useInput({
-        values: ''
-    })
+  const { values } = state;
 
-    const {values} = state;
+  return (
+    <>
+      {type === 'auth' && (
+        <input
+          className="defaultFont inputs__auth bold"
+          type="text"
+          name="values"
+          value={values}
+          onChange={handleChange}
+        />
+      )}
+    </>
+  );
+};
 
-    return (
-        <>
-            {
-                type === "auth" && <input type="text" name="values" value={values} onChange={handleChange}/>
-            }
-        </>
-    )
-}
-
-export default Input
+export default Input;
