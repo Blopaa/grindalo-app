@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('../../assets/Roboto-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoSlab';
+  src: url('../../assets/RobotoSlab-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin themable($theme-name, $fsize, $lheight, $fontFamily) {
+  .#{$theme-name} {
+    font-size: $fsize;
+    line-height: $lheight;
+    font-family: $fontFamily;
+    text-align: center;
+  }
+}
+
+
+@include themable(defaultFont, 1rem, 1rem, Roboto)
