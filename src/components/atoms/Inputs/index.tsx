@@ -8,6 +8,8 @@ type InputProps = {
 };
 
 const Input = styled.input`
+  font-size: ${({ theme }) => theme.fonts.input.FontSize};
+  line-height: ${({ theme }) => theme.fonts.input.LineHeight};
   border-radius: 10px;
   border: none;
   outline: none;
@@ -16,7 +18,7 @@ const Input = styled.input`
   min-width: 250px;
   min-height: 50px;
   transition: all 0.4s;
-  background-color: ${({theme}) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white};
   padding-left: 1rem;
 
   &:focus,
@@ -30,7 +32,7 @@ const Input = styled.input`
 
   &::placeholder {
     transition: opacity 0.2s;
-    color: ${({theme}) => theme.colors.secondary.base};
+    color: ${({ theme }) => theme.colors.secondary.base};
     opacity: 1;
   }
 `;

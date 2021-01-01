@@ -1,13 +1,17 @@
 import styled from '@emotion/styled';
+import { IonItem } from '@ionic/react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type ButtonProps = {
   buttonType: 'outline' | 'fill';
-  bgColor?: string;
-  fColor?: string;
+  bgColor: string;
+  fColor: string;
   children?: React.ReactChild;
   width: string;
   height: string;
+  border: string;
+  href?: string;
 };
 
 const Button = styled.button<ButtonProps>`
@@ -15,8 +19,8 @@ const Button = styled.button<ButtonProps>`
   background-color: ${({ buttonType, bgColor }) =>
     buttonType === 'fill' ? bgColor : 'transparent'};
   outline: none;
-  border: ${({ bgColor, buttonType }) =>
-    buttonType === 'outline' ? `4px solid ${bgColor}` : 'none'};
+  border: ${({ bgColor, buttonType, border }) =>
+    buttonType === 'outline' ? `${border} solid ${bgColor}` : 'none'};
   color: ${({ fColor, buttonType, bgColor }) =>
     buttonType === 'outline' ? bgColor : fColor};
   cursor: pointer;
@@ -25,10 +29,10 @@ const Button = styled.button<ButtonProps>`
     height: height,
   })}
   border-radius: 10px;
-  &:hover{
+  &:hover {
     background-color: ${({ theme, buttonType, bgColor }) =>
       buttonType === 'fill' ? theme.colors.secondary.light : bgColor};
-    color: ${({ fColor, buttonType, bgColor }) =>
+    color: ${({ fColor, buttonType }) =>
       buttonType === 'outline' ? fColor : fColor};
   }
 `;
@@ -40,17 +44,37 @@ const ButtonAtom: React.FC<ButtonProps> = ({
   fColor,
   width,
   height,
+  border,
+  href,
 }) => {
   return (
-    <Button
-      buttonType={buttonType}
-      bgColor={bgColor}
-      fColor={fColor}
-      width={width}
-      height={height}
-    >
-      {children}
-    </Button>
+    <>
+      {href ? (
+        <Link to={href}>
+          <Button
+            buttonType={buttonType}
+            bgColor={bgColor}
+            fColor={fColor}
+            width={width}
+            height={height}
+            border={border}
+          >
+            {children}
+          </Button>
+        </Link>
+      ) : (
+        <Button
+          buttonType={buttonType}
+          bgColor={bgColor}
+          fColor={fColor}
+          width={width}
+          height={height}
+          border={border}
+        >
+          {children}
+        </Button>
+      )}
+    </>
   );
 };
 

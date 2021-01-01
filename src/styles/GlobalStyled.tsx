@@ -1,9 +1,13 @@
-import { Global, css } from "@emotion/react";
-import React from "react";
+import { Global, css } from '@emotion/react';
+import React from 'react';
 
 const GlobalStyled = () => (
-   <Global
+  <Global
     styles={css`
+      /* cyrillic-ext */
+      @font-face {
+        font-family: 'Roboto';
+        src: url('https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu72xKOzY.woff2');}
       * {
         margin: 0px;
         padding: 0px;
@@ -11,26 +15,17 @@ const GlobalStyled = () => (
 
       html,
       body {
-        background-color: #FCC21B;
+        background-color: #fcc21b;
         height: 100%;
         width: 100%;
       }
 
-      @font-face {
-        font-family: 'Roboto';
-        src: url('../assets/Roboto-Regular.ttf');
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      @font-face {
-        font-family: 'RobotoSlab';
-        src: url('../assets/RobotoSlab-Regular.ttf');
-        font-weight: normal;
-        font-style: normal;
+      a{
+        text-decoration: none;
+        
       }
     `}
-  /> 
+  />
 );
 
 export default GlobalStyled;
