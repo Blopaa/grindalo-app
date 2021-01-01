@@ -7,7 +7,7 @@ interface IinitialState {
 const useInput = (initialState: IinitialState = {}): any[] => {
     const [state, setState] = useState(initialState)
 
-    const handleInputChange = ({target}: any): void => {
+    const handleInputChange = ({target}:  React.ChangeEvent<HTMLInputElement>): void => {
         if(!target) throw new Error("no target sent");
         setState({
             ...state,

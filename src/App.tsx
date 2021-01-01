@@ -1,12 +1,17 @@
-import React from 'react'
-import './styles/index.scss'
+import { ThemeProvider } from '@emotion/react';
+import React from 'react';
+import GlobalStyled from './styles/GlobalStyled';
+import theme from './styles/theme';
+import InputAtom from './components/atoms/Inputs'
 
 const App = () => {
-    return (
-        <div>
-            hello world
-        </div>
-    )
-}
+    console.log(theme);
+  return (
+      <ThemeProvider theme={theme}>
+        <GlobalStyled />
+        <InputAtom placeholder="email" inputType="auth" />
+      </ThemeProvider>
+  );
+};
 
 export default App;

@@ -1,13 +1,41 @@
 import React from 'react';
 import useInput from '../../../hooks/useInput';
+import styled  from "@emotion/styled";
 
 type InputProps = {
-  type: 'auth';
-  nameAndValue: string;
-  name: string;
+  inputType: 'auth';
+  placeholder: string;
 };
 
-const Input: React.FC<InputProps> = ({ type, name }) => {
+const Input = styled.input`
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    height: 100%;
+    width: calc(100% - 1rem);
+    min-width: 250px;
+    min-height: 50px;
+    transition: all 0.4s;
+    background-color: $white;
+    padding-left: 1rem;
+    
+    &:focus, 
+    &:hover,
+    &:active {
+        background-size: 100% 0.1em;
+        &::placeholder{
+            opacity: .7;
+        }
+    }
+    
+    &::placeholder{
+        transition: opacity .2s;
+        color:${props => props.theme.colors.secondary};
+        opacity: 1;
+    }
+`
+
+const InputAtom: React.FC<InputProps> = ({ inputType, placeholder }) => {
   const [state, handleChange] = useInput({
     values: '',
   });
@@ -16,18 +44,18 @@ const Input: React.FC<InputProps> = ({ type, name }) => {
 
   return (
     <>
-      {type === 'auth' && (
-        <input
-          className="defaultFont inputs__auth bold"
+      {inputType === 'auth' && (
+        <Input
+          className="inputs__auth"
           type="text"
           name="values"
           value={values}
           onChange={handleChange}
-          placeholder={name}
-        />
+          placeholder={placeholder}/>
+        
       )}
     </>
   );
 };
 
-export default Input;
+export default InputAtom;
