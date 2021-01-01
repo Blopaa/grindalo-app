@@ -26,10 +26,11 @@ const AuthFooterOrganism: React.FC<AuthFooterProps> = ({ linkMsg, msg, href }) =
     <AuthFooter>
       <p>{msg}</p>
       <ButtonAtom
+        buttonType="button"
         border="1px"
         fColor="#303030"
         bgColor="#FCC21B"
-        buttonType="outline"
+        buttonDesign="outline"
         width="6.125rem"
         height="1.5rem"
         href={href}

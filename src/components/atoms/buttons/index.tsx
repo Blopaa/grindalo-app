@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import { IonItem } from '@ionic/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 type ButtonProps = {
-  buttonType: 'outline' | 'fill';
+  buttonDesign: 'outline' | 'fill';
+  buttonType?: 'button' | 'submit' | 'reset';
   bgColor: string;
   fColor: string;
   children?: React.ReactChild;
@@ -15,14 +15,17 @@ type ButtonProps = {
 };
 
 const Button = styled.button<ButtonProps>`
+  font-size: 1rem;
+  font-family: sans-serif;
+  font-weight: bold;
   transition: all 0.3s;
-  background-color: ${({ buttonType, bgColor }) =>
-    buttonType === 'fill' ? bgColor : 'transparent'};
+  background-color: ${({ buttonDesign, bgColor }) =>
+    buttonDesign === 'fill' ? bgColor : 'transparent'};
   outline: none;
-  border: ${({ bgColor, buttonType, border }) =>
-    buttonType === 'outline' ? `${border} solid ${bgColor}` : 'none'};
-  color: ${({ fColor, buttonType, bgColor }) =>
-    buttonType === 'outline' ? bgColor : fColor};
+  border: ${({ bgColor, buttonDesign, border }) =>
+    buttonDesign === 'outline' ? `${border} solid ${bgColor}` : 'none'};
+  color: ${({ fColor, buttonDesign, bgColor }) =>
+    buttonDesign === 'outline' ? bgColor : fColor};
   cursor: pointer;
   ${({ width, height }) => ({
     width: width,
@@ -30,15 +33,16 @@ const Button = styled.button<ButtonProps>`
   })}
   border-radius: 10px;
   &:hover {
-    background-color: ${({ theme, buttonType, bgColor }) =>
-      buttonType === 'fill' ? theme.colors.secondary.light : bgColor};
-    color: ${({ fColor, buttonType }) =>
-      buttonType === 'outline' ? fColor : fColor};
+    background-color: ${({ theme, buttonDesign, bgColor }) =>
+      buttonDesign === 'fill' ? theme.colors.secondary.light : bgColor};
+    color: ${({ fColor, buttonDesign }) =>
+      buttonDesign === 'outline' ? fColor : fColor};
   }
 `;
 
 const ButtonAtom: React.FC<ButtonProps> = ({
-  buttonType,
+  buttonDesign,
+  buttonType = 'button',
   bgColor,
   children,
   fColor,
@@ -52,7 +56,8 @@ const ButtonAtom: React.FC<ButtonProps> = ({
       {href ? (
         <Link to={href}>
           <Button
-            buttonType={buttonType}
+            type={buttonType}
+            buttonDesign={buttonDesign}
             bgColor={bgColor}
             fColor={fColor}
             width={width}
@@ -64,7 +69,8 @@ const ButtonAtom: React.FC<ButtonProps> = ({
         </Link>
       ) : (
         <Button
-          buttonType={buttonType}
+          type={buttonType}
+          buttonDesign={buttonDesign}
           bgColor={bgColor}
           fColor={fColor}
           width={width}

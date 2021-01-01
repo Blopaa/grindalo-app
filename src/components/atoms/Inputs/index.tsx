@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useInput from '../../../hooks/useInput';
 import styled from '@emotion/styled';
 
 type InputProps = {
-  inputType: 'auth';
+  inputType: string;
+  inputDesign: 'auth';
   placeholder: string;
+  inputName: string;
+  sendValue: React.Dispatch<React.SetStateAction<{}>>;
+  prevValue: any;
 };
 
-const Input = styled.input`
+const AuthInput = styled.input`
   font-size: ${({ theme }) => theme.fonts.input.FontSize};
   line-height: ${({ theme }) => theme.fonts.input.LineHeight};
   border-radius: 10px;
   border: none;
   outline: none;
-  height: 100%;
   width: calc(100% - 1rem);
   min-width: 250px;
   min-height: 50px;
   transition: all 0.4s;
   background-color: ${({ theme }) => theme.colors.white};
   padding-left: 1rem;
+  margin: 1rem 0;
 
   &:focus,
   &:hover,
@@ -37,20 +41,30 @@ const Input = styled.input`
   }
 `;
 
-const InputAtom: React.FC<InputProps> = ({ inputType, placeholder }) => {
+const InputAtom: React.FC<InputProps> = ({
+  inputDesign,
+  placeholder,
+  inputName,
+  sendValue,
+  prevValue,
+  inputType,
+}) => {
   const [state, handleChange] = useInput({
-    values: '',
+    [inputName]: '',
   });
 
-  const { values } = state;
+  const values = state[inputName];
+
+  useEffect(() => {
+    sendValue({ ...prevValue, [inputName]: values });
+  }, [values]);
 
   return (
     <>
-      {inputType === 'auth' && (
-        <Input
-          className="inputs__auth"
-          type="text"
-          name="values"
+      {inputDesign === 'auth' && (
+        <AuthInput
+          type={inputType}
+          name={inputName}
           value={values}
           onChange={handleChange}
           placeholder={placeholder}
