@@ -4,9 +4,10 @@ import useInput from '../../../hooks/useInput';
 type InputProps = {
   type: 'auth';
   nameAndValue: string;
+  name: string;
 };
 
-const Input: React.FC<InputProps> = ({ type }) => {
+const Input: React.FC<InputProps> = ({ type, name }) => {
   const [state, handleChange] = useInput({
     values: '',
   });
@@ -22,6 +23,7 @@ const Input: React.FC<InputProps> = ({ type }) => {
           name="values"
           value={values}
           onChange={handleChange}
+          placeholder={name}
         />
       )}
     </>
