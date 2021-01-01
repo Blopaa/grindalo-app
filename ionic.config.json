@@ -1,0 +1,7 @@
+{
+  "name": "grindalo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
