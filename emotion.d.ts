@@ -3,8 +3,14 @@ import "@emotion/react";
 declare module "@emotion/react" {
     interface IthemeColors {
         primary: string;
-        secondary: string;
+        secondary: IthemeColor;
         white: string;
+    }
+
+    interface IthemeColor {
+        dark: string;
+        base: string;
+        light: string
     }
     
     interface ISizeTextProperties {
