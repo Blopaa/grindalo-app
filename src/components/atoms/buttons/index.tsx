@@ -17,7 +17,6 @@ type ButtonProps = {
 const Button = styled.button<ButtonProps>`
   font-size: 1rem;
   font-family: sans-serif;
-  font-weight: bold;
   transition: all 0.3s;
   background-color: ${({ buttonDesign, bgColor }) =>
     buttonDesign === 'fill' ? bgColor : 'transparent'};

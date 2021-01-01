@@ -57,6 +57,7 @@ const InputAtom: React.FC<InputProps> = ({
 
   useEffect(() => {
     sendValue({ ...prevValue, [inputName]: values });
+    // eslint-disable-next-line
   }, [values]);
 
   return (

@@ -4,7 +4,7 @@ import ButtonAtom from '../../../components/atoms/buttons';
 import InputAtom from '../../../components/atoms/Inputs';
 import AuthFooterOrganism from '../../../components/organims/AuthFooter';
 
-const SignIn = styled.div`
+const SignUp = styled.div`
 
   p {
     width: 100%;
@@ -30,7 +30,7 @@ const FormContainer = styled.div`
     }
 `;
 
-const SignInPage = () => {
+const SignUpPage = () => {
   const [inputValues, setInputValues] = useState({});
 
   useEffect(() => {
@@ -39,9 +39,17 @@ const SignInPage = () => {
 
   return (
     <>
-      <SignIn>
+      <SignUp>
         <FormContainer>
-          <p>Iniciar Sesion</p>
+          <p>Crear cuenta</p>
+          <InputAtom
+            prevValue={inputValues}
+            sendValue={setInputValues}
+            inputName="name"
+            inputDesign="auth"
+            placeholder="Nombre"
+            inputType="text"
+          />
           <InputAtom
             prevValue={inputValues}
             sendValue={setInputValues}
@@ -68,17 +76,17 @@ const SignInPage = () => {
             height="3.125rem"
             border="10px"
           >
-            Iniciar Sesion
+            Crear cuenta
           </ButtonAtom>
         </FormContainer>
-      </SignIn>
+      </SignUp>
       <AuthFooterOrganism
-        msg="¿Aún no tienes cuenta?"
-        linkMsg="crear cuenta"
-        href="/signup"
+        msg="¿ya tienes cuenta?"
+        linkMsg="iniciar sesion"
+        href="/signin"
       />
     </>
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
