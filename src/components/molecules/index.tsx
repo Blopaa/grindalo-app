@@ -21,11 +21,12 @@ const rotate = keyframes`
 `;
 
 const Sidebar = styled.aside<sidebarProps>`
+  box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25);
   position: fixed;
   left: ${({ show }) => (!show ? 'calc(1rem - 75%)' : '0px')};
   background-color: ${({ theme }) => theme.colors.white};
   height: 100vh;
-  width: calc(75% - 1rem);
+  width: calc((75% - 1rem) - 5px);
   color: #303030;
   font-family: sans-serif;
   font-weight: bold;
@@ -92,9 +93,8 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
   history,
   setShow,
 }) => {
-
   const handleInputSidebar = () => {
-    if(!setShow) throw new Error("no setShow")
+    if (!setShow) throw new Error('no setShow');
     setShow(false);
   };
 
