@@ -9,7 +9,7 @@ const themeColor = {
   
     white:  "#EEEEEE",
 
-    gray: '#616161'
+    gray: '#CCCCCC'
     
 }
 
