@@ -32,7 +32,7 @@ const FormContainer = styled.div`
   }
 `;
 
-const SignInPage = () => {
+const SignInPage: React.FC<any> = ({history}) => {
   const [inputValues, setInputValues] = useState({});
 
   useEffect(() => {
@@ -45,6 +45,7 @@ const SignInPage = () => {
     e.preventDefault();
     const token = await signin(inputValues);
     dispatch({ type: authTypes.login, payload: token?.data });
+    history.push('/home')
   };
 
   return (

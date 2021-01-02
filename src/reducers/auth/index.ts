@@ -1,15 +1,17 @@
 import { authTypes } from '../../types/authTypes';
+import { initialAuthState } from '../../App';
 
-export const authReducer = (state: {} = {}, action: any) => {
+export const authReducer = (
+  state: initialAuthState = { token: null, logged: false },
+  action: any
+) => {
   switch (action.type) {
     case authTypes.login:
-      console.log(action.payload)
-      console.log("hereinreducer")
-      return { token: action.payload };
+      return { token: action.payload, logged: true };
 
     case authTypes.logout:
-      return { token: null };
+      return { token: null, logged: false };
     default:
-      return state
+      return state;
   }
 };
