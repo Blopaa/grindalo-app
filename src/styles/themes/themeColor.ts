@@ -8,6 +8,8 @@ const themeColor = {
     },
   
     white:  "#EEEEEE",
+
+    gray: '#616161'
     
 }
 

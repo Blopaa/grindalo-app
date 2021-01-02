@@ -5,6 +5,7 @@ declare module "@emotion/react" {
         primary: string;
         secondary: IthemeColor;
         white: string;
+        gray: string;
     }
 
     interface IthemeColor {

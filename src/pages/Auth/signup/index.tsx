@@ -32,7 +32,7 @@ const FormContainer = styled.div`
   }
 `;
 
-const SignUpPage = () => {
+const SignUpPage: React.FC<any> = ({history}) => {
   const [inputValues, setInputValues] = useState({});
 
   useEffect(() => {
@@ -45,6 +45,7 @@ const SignUpPage = () => {
     e.preventDefault();
     const token = await signup(inputValues);
     dispatch({ type: authTypes.login, payload: token?.data });
+    history.replace('/home')
   };
 
   return (

@@ -45,7 +45,7 @@ const SignInPage: React.FC<any> = ({history}) => {
     e.preventDefault();
     const token = await signin(inputValues);
     dispatch({ type: authTypes.login, payload: token?.data });
-    history.push('/home')
+    history.replace('/home')
   };
 
   return (

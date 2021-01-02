@@ -2,6 +2,7 @@ interface IthemeColors {
     primary: string;
     secondary: IthemeColor;
     white: string;
+    gray: string;
 }
 
 interface IthemeColor {
