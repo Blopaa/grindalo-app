@@ -1,0 +1,1 @@
+export const validateEmail = '[A-Za-z0-9]{1,}[@]{1}[a-z]{1,}[.][a-z]{1,}'

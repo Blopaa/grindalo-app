@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
-import Sidebar from '../../components/molecules';
+import React from 'react';
 import NavigationOrganism from '../../components/organims/navigation';
 
 const Home = styled.div`

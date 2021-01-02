@@ -9,6 +9,7 @@ type InputProps = {
   inputName: string;
   sendValue: React.Dispatch<React.SetStateAction<{}>>;
   prevValue: any;
+  pattern?: string;
 };
 
 const AuthInput = styled.input`
@@ -48,6 +49,7 @@ const InputAtom: React.FC<InputProps> = ({
   sendValue,
   prevValue,
   inputType,
+  pattern
 }) => {
   const [state, handleChange] = useInput({
     [inputName]: '',
@@ -64,6 +66,8 @@ const InputAtom: React.FC<InputProps> = ({
     <>
       {inputDesign === 'auth' && (
         <AuthInput
+        autoComplete="off"
+        pattern={pattern}
           type={inputType}
           name={inputName}
           value={values}

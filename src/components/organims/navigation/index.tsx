@@ -14,17 +14,17 @@ const Navigation = styled.nav`
 `;
 
 const Menu = styled.button`
-display: flex;
-align-items: center;
+  display: flex;
+  align-items: center;
   background-color: transparent;
   outline: none;
   border: none;
   font-size: 2.5rem;
-  color: ${({theme}) => theme.colors.white}
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 const NavigationOrganism: React.FC<any> = (props) => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   return (
     <>

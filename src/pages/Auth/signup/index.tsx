@@ -4,6 +4,7 @@ import ButtonAtom from '../../../components/atoms/buttons';
 import InputAtom from '../../../components/atoms/Inputs';
 import AuthFooterOrganism from '../../../components/organims/AuthFooter';
 import { AuthContext } from '../../../contexts';
+import { validateEmail } from '../../../regexs';
 import { signup } from '../../../services/auth';
 import { authTypes } from '../../../types/authTypes';
 
@@ -85,6 +86,7 @@ const SignUpPage: React.FC<any> = ({ history }) => {
               inputType="text"
             />
             <InputAtom
+              pattern={validateEmail}
               prevValue={inputValues}
               sendValue={setInputValues}
               inputName="email"

@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
-import React, { FormEvent, useContext, useEffect, useState } from 'react';
+import React, { FormEvent, useContext,  useState } from 'react';
 import ButtonAtom from '../../../components/atoms/buttons';
 import InputAtom from '../../../components/atoms/Inputs';
 import AuthFooterOrganism from '../../../components/organims/AuthFooter';
 import { AuthContext } from '../../../contexts';
+import { validateEmail } from '../../../regexs';
 import { signin } from '../../../services/auth';
 import { authTypes } from '../../../types/authTypes';
 
@@ -51,10 +52,6 @@ const SignInPage: React.FC<any> = ({ history }) => {
   const [inputValues, setInputValues] = useState({});
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    console.log(inputValues);
-  }, [inputValues]);
-
   const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -76,6 +73,7 @@ const SignInPage: React.FC<any> = ({ history }) => {
           {error && <Error>{error}</Error>}
           <form onSubmit={handleSubmit}>
             <InputAtom
+            pattern={validateEmail}
               prevValue={inputValues}
               sendValue={setInputValues}
               inputName="email"
