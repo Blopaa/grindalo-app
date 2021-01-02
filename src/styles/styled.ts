@@ -3,6 +3,7 @@ interface IthemeColors {
     secondary: IthemeColor;
     white: string;
     gray: string;
+    error: string;
 }
 
 interface IthemeColor {

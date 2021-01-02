@@ -1,16 +1,17 @@
 const themeColor = {
-    primary:  "#FCC21B",
-    
-    secondary: {
-        light: "#404040",
-        base: "#303030",
-        dark: "#202020"
-    },
-  
-    white:  "#EEEEEE",
+  primary: '#FCC21B',
 
-    gray: '#CCCCCC'
-    
-}
+  secondary: {
+    light: '#404040',
+    base: '#303030',
+    dark: '#202020',
+  },
 
-export default themeColor
+  white: '#EEEEEE',
+
+  gray: '#CCCCCC',
+
+  error: '#F70000',
+};
+
+export default themeColor;

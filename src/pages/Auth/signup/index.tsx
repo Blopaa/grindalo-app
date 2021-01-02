@@ -32,7 +32,24 @@ const FormContainer = styled.div`
   }
 `;
 
-const SignUpPage: React.FC<any> = ({history}) => {
+const Error = styled.div`
+  width: calc(100% - 2rem);
+  height: 3.125rem;
+  background-color: ${({ theme }) => theme.colors.error};
+  border-radius: 10px;
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+  text-align: justify-content;
+`;
+
+const SignUpPage: React.FC<any> = ({ history }) => {
+  const [error, setError] = useState(null);
+
   const [inputValues, setInputValues] = useState({});
 
   useEffect(() => {
@@ -44,8 +61,12 @@ const SignUpPage: React.FC<any> = ({history}) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const token = await signup(inputValues);
-    dispatch({ type: authTypes.login, payload: token?.data });
-    history.replace('/home')
+    if (token?.message) {
+      setError(token.message);
+    } else {
+      dispatch({ type: authTypes.login, payload: token?.data });
+      history.replace('/home');
+    }
   };
 
   return (
@@ -53,6 +74,7 @@ const SignUpPage: React.FC<any> = ({history}) => {
       <SignUp>
         <FormContainer>
           <p>Crear cuenta</p>
+          {error && <Error>{error}</Error>}
           <form onSubmit={handleSubmit}>
             <InputAtom
               prevValue={inputValues}

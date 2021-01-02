@@ -73,7 +73,7 @@ const Sidebar = styled.aside<sidebarProps>`
     box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
     background-color: ${({ theme }) => theme.colors.gray};
     p svg {
-      animation: ease-in-out 0.3s forwards ${rotate};
+      animation: ease-in-out 0.2s forwards ${rotate};
     }
   }
 `;
