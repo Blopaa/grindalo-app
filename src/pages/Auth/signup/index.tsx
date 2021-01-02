@@ -53,10 +53,6 @@ const SignUpPage: React.FC<any> = ({ history }) => {
 
   const [inputValues, setInputValues] = useState({});
 
-  useEffect(() => {
-    console.log(inputValues);
-  }, [inputValues]);
-
   const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
 import { HiMenu } from 'react-icons/hi';
-import SidebarMolecule from '../../molecules';
+import SidebarMolecule from '../../molecules/sidebar';
 
 const Navigation = styled.nav`
   background-color: ${({ theme }) => theme.colors.primary};

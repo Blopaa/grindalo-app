@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import NavlinkAtom from '../atoms/navlink';
+import NavlinkAtom from '../../atoms/navlink';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { ImCross } from 'react-icons/im';
 import { keyframes } from '@emotion/react';
