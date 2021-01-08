@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Lemon } from '../../../assets/icons/lemon.svg';
 import { AuthContext } from '../../../contexts';
 import { getLikedPost, giveLike } from '../../../services/user/index';
@@ -23,6 +24,7 @@ interface spot {
 }
 
 const SpotCard = styled.div<styleProps>`
+  cursor: pointer;
   font-family: sans-serif;
   overflow: hidden;
   margin: 1rem;
@@ -62,40 +64,41 @@ const SpotCardMolecule: React.FC<spotCardProps> = ({ name, imgurl, id }) => {
 
   const { state } = useContext(AuthContext);
 
-  const getLiked = async () => {
-    const liked = await getLikedPost(state.token);
-    if (liked?.data) {
-      setLikedOnes(liked.data);
-    } else {
-      console.log(liked?.message);
-    }
-  };
-
   useEffect(() => {
+    const getLiked = async () => {
+      const liked = await getLikedPost(state.token);
+      if (liked?.data) {
+        setLikedOnes(liked.data);
+      } else {
+        console.log(liked?.message);
+      }
+    };
     getLiked();
-  }, []);
+  }, [state.token]);
 
   useEffect(() => {
-    likedOnes.map((e: spot) => {
+    likedOnes.forEach((e: spot) => {
       if (e.id === id) {
         setIsLiked(true);
       }
     });
-  }, [likedOnes]);
+  }, [likedOnes, id]);
 
   const handleLike = () => {
     setIsLiked(!isliked);
-    giveLike(id, state.token)
+    giveLike(id, state.token);
   };
 
   return (
-    <SpotCard isLiked={isliked}>
+    <Link to={`/home/${id}`}>
+      <SpotCard isLiked={isliked}>
       <MainImg src={imgurl} alt="main image" />
       <div>
         <p>{name}</p>
         <Lemon onClick={handleLike} />
       </div>
     </SpotCard>
+    </Link>
   );
 };
 

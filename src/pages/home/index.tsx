@@ -1,17 +1,10 @@
 import styled from '@emotion/styled';
 import React, { useContext, useEffect, useState } from 'react';
+import { spot } from '../../../@types/types';
 import SpotCardMolecule from '../../components/molecules/spotCard';
 import NavigationOrganism from '../../components/organims/navigation';
 import { AuthContext } from '../../contexts';
 import { getSpots } from '../../services/spot';
-
-interface spot {
-  id: number;
-  imgs: string[];
-  title: string;
-  description: string;
-  coords: string[];
-}
 
 const Home = styled.div`
   height: 100%;
@@ -27,16 +20,16 @@ const HomePage: React.FC<any> = (props) => {
   const [data, setData] = useState([]);
   const { state } = useContext(AuthContext);
 
-  const getAllSpots = async () => {
-    const spots = await getSpots(state.token);
-    if (spots?.data) {
-      setData(spots?.data);
-    }
-  };
-
+  
   useEffect(() => {
+    const getAllSpots = async () => {
+      const spots = await getSpots(state.token);
+      if (spots?.data) {
+        setData(spots?.data);
+      }
+    };
     getAllSpots();
-  }, [])
+  }, [state.token])
 
   return (
     <Home>
@@ -46,7 +39,7 @@ const HomePage: React.FC<any> = (props) => {
           <SpotCardMolecule
             id={e.id}
             name={e.title}
-            imgurl="https://lh3.googleusercontent.com/proxy/qI0RlJiKsxldKVYrkyIIMDTRf-sDrizTAOicggwnIP038ZpPI-9wTkg3SziFU22b8fi0V6hEr--2_9Oip_DTKGDPB_cdR0qMn4_HzB385_bfruPCWCq8mgaN8r8ISt6oVho3dX1KhoNFWq0sEL_RA6DRQKJSgwnPavTUysrCUMN9rBCQib0lkEeeoM_CiQh9FuGrFr_UpodWCNC5MsATwNnbWUCR1WJ8Elk79bKbjuvEvdY14cMgoKPzxOCT"
+            imgurl={e.imgs[0]}
             key={e.id}
           ></SpotCardMolecule>
         ))}

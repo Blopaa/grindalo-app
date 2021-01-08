@@ -10,6 +10,7 @@ import SignUpPage from './pages/Auth/signup';
 import { authReducer } from './reducers/auth';
 import { AuthContext } from './contexts';
 import HomePage from './pages/home';
+import SpotPage from './pages/spot';
 export interface initialAuthState {
   token: string | null;
   logged: boolean;
@@ -36,6 +37,7 @@ const App = () => {
         <AuthContext.Provider value={{ state, dispatch }}>
           <IonRouterOutlet>
             <IonReactRouter>
+              <Route path="/home/:id" exact={true} component={SpotPage} />
               <Route
                 exact
                 path="/home"

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { FormEvent, useContext, useEffect, useState } from 'react';
+import React, { FormEvent, useContext, useState } from 'react';
 import ButtonAtom from '../../../components/atoms/buttons';
 import InputAtom from '../../../components/atoms/Inputs';
 import AuthFooterOrganism from '../../../components/organims/AuthFooter';
