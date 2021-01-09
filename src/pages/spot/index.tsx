@@ -8,11 +8,17 @@ import ButtonAtom from '../../components/atoms/buttons';
 import { AuthContext } from '../../contexts';
 import { getSpotById } from '../../services/spot';
 import { FaArrowLeft } from 'react-icons/fa';
+import { ReactComponent as Lemon } from '../../assets/icons/lemon.svg';
+import { getLikedPost, giveLike } from '../../services/user';
 
 interface SpotPageProps
   extends RouteComponentProps<{
     id: string;
   }> {}
+
+type styleProps = {
+  isLiked: boolean;
+};
 
 const Spot = styled.div`
   padding: 1rem 0;
@@ -23,8 +29,6 @@ const Spot = styled.div`
   color: ${({ theme }) => theme.colors.secondary.base};
 
   h2 {
-    width: calc(100% - 1rem);
-    padding-left: 1rem;
     font-size: 2rem;
     font-family: sans-serif;
     text-align: left;
@@ -44,6 +48,19 @@ const MainImg = styled.img`
   border-radius: 10%;
 `;
 
+const Header = styled.div<styleProps>`
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+  svg {
+    color: ${({ isLiked, theme }) =>
+      isLiked ? theme.colors.primary : theme.colors.white};
+    stroke: ${({ isLiked, theme }) =>
+      !isLiked ? theme.colors.secondary.base : theme.colors.white};
+      transition: all .2s;
+  }
+`;
+
 const SpotPage: React.FC<SpotPageProps> = ({ match }) => {
   const [spot, setspot] = useState<spot>({
     title: '',
@@ -54,6 +71,8 @@ const SpotPage: React.FC<SpotPageProps> = ({ match }) => {
   });
 
   const { state } = useContext(AuthContext);
+  const [likedOnes, setLikedOnes] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -71,13 +90,40 @@ const SpotPage: React.FC<SpotPageProps> = ({ match }) => {
     };
   }, [match.params.id, state.token]);
 
+  useEffect(() => {
+    const getLiked = async () => {
+      const liked = await getLikedPost(state.token);
+      if (liked?.data) {
+        setLikedOnes(liked.data);
+      } else {
+        console.log(liked?.message);
+      }
+    };
+    getLiked();
+  }, [state.token]);
+
+  useEffect(() => {
+    likedOnes.forEach((e: spot) => {
+      if (e.id === parseInt(match.params.id)) {
+        setIsLiked(true);
+      }
+    });
+  }, [likedOnes, match.params.id]);
+
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+    giveLike(parseInt(match.params.id), state.token);
+  };
+
   return (
     <Spot>
-      <Link to="/home" style={{paddingLeft: '1rem', fontSize: '2rem'}}>
+      <Link to="/home" style={{ paddingLeft: '1rem', fontSize: '2rem' }}>
         <FaArrowLeft></FaArrowLeft>
       </Link>
       <MainImg src={spot.imgs[0]} alt="main image" />
-      <h2>{spot.title}</h2>
+      <Header isLiked={isLiked}>
+        <h2>{spot.title}</h2> <Lemon onClick={handleLike}/>
+      </Header>
       <p>{spot.description}</p>
       <div
         style={{

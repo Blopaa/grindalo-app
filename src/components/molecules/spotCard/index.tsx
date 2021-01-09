@@ -55,7 +55,7 @@ const SpotCard = styled.div<styleProps>`
 const MainImg = styled.img`
   object-fit: cover;
   height: 6.875rem;
-  width: calc(100%-2rem);
+  width: 100%;
 `;
 
 const SpotCardMolecule: React.FC<spotCardProps> = ({ name, imgurl, id }) => {
@@ -90,15 +90,15 @@ const SpotCardMolecule: React.FC<spotCardProps> = ({ name, imgurl, id }) => {
   };
 
   return (
-    <Link to={`/home/${id}`}>
-      <SpotCard isLiked={isliked}>
-      <MainImg src={imgurl} alt="main image" />
+    <SpotCard isLiked={isliked}>
+      <Link to={`/home/${id}`}>
+        <MainImg src={imgurl} alt="main image" />
+      </Link>
       <div>
         <p>{name}</p>
         <Lemon onClick={handleLike} />
       </div>
     </SpotCard>
-    </Link>
   );
 };
 
