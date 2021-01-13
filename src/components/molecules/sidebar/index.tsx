@@ -112,22 +112,22 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
           </div>
           <ul>
             <li >
-              <NavlinkAtom href="/home/grind" history={history}>
+              <NavlinkAtom href="/spots/grind" history={history}>
                 Grinds
               </NavlinkAtom>
             </li>
             <li >
-              <NavlinkAtom href="/home/escaleras" history={history}>
+              <NavlinkAtom href="/spots/escaleras" history={history}>
                 Escaleras
               </NavlinkAtom>
             </li>
             <li >
-              <NavlinkAtom href="/home/flat" history={history}>
+              <NavlinkAtom href="/spots/flat" history={history}>
                 Flat tricks
               </NavlinkAtom>
             </li>
             <li >
-              <NavlinkAtom href="/home/cruising" history={history}>
+              <NavlinkAtom href="/spots/cruising" history={history}>
                 Just cruising
               </NavlinkAtom>
             </li>

@@ -23,12 +23,12 @@ const Menu = styled.button`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-const NavigationOrganism: React.FC<any> = (props) => {
+const NavigationOrganism: React.FC<any> = ({history}) => {
   const [show, setShow] = useState(false);
 
   return (
     <>
-      <SidebarMolecule history={props} show={show} setShow={setShow} />
+      <SidebarMolecule history={history} show={show} setShow={setShow} />
       <Navigation>
         <Menu onClick={() => setShow(!show)}>
           <HiMenu></HiMenu>

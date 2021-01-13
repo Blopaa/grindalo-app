@@ -117,7 +117,7 @@ const SpotPage: React.FC<SpotPageProps> = ({ match }) => {
 
   return (
     <Spot>
-      <Link to="/home" style={{ paddingLeft: '1rem', fontSize: '2rem' }}>
+      <Link to="/home" style={{ paddingLeft: '1rem', fontSize: '2rem', color: '#303030' }}>
         <FaArrowLeft></FaArrowLeft>
       </Link>
       <MainImg src={spot.imgs[0]} alt="main image" />
