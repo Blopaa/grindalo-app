@@ -21,6 +21,10 @@ const rotate = keyframes`
 `;
 
 const Sidebar = styled.aside<sidebarProps>`
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.secondary.base};
+  }
   box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25);
   position: fixed;
   left: ${({ show }) => (!show ? 'calc(1rem - 75%)' : '0px')};
@@ -104,6 +108,13 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
         <Cross onClick={handleInputSidebar}>
           <ImCross></ImCross>
         </Cross>
+        <li style={{textAlign: 'left'}}>
+          <NavlinkAtom href="/home" history={history}>
+            <div  style={{width: '100%'}}>
+              <p style={{width: '100%'}}>Home</p>
+            </div>
+          </NavlinkAtom>
+        </li>
         <li>
           <div>
             <p>
@@ -111,22 +122,22 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
             </p>
           </div>
           <ul>
-            <li >
+            <li>
               <NavlinkAtom href="/spots/grind" history={history}>
                 Grinds
               </NavlinkAtom>
             </li>
-            <li >
+            <li>
               <NavlinkAtom href="/spots/escaleras" history={history}>
                 Escaleras
               </NavlinkAtom>
             </li>
-            <li >
+            <li>
               <NavlinkAtom href="/spots/flat" history={history}>
                 Flat tricks
               </NavlinkAtom>
             </li>
-            <li >
+            <li>
               <NavlinkAtom href="/spots/cruising" history={history}>
                 Just cruising
               </NavlinkAtom>
