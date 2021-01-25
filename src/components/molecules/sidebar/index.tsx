@@ -1,24 +1,15 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import NavlinkAtom from '../../atoms/navlink';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { ImCross } from 'react-icons/im';
-import { keyframes } from '@emotion/react';
 
 type sidebarProps = {
   show: boolean;
   setShow?: React.Dispatch<React.SetStateAction<boolean>>;
   history?: History;
+  isShow?: boolean; 
 };
-
-const rotate = keyframes`
-    0%{
-    transform: rotate(0deg);        } 
-    100%{
-    transform: rotate(180deg);   
-    }
-
-`;
 
 const Sidebar = styled.aside<sidebarProps>`
   a {
@@ -41,13 +32,8 @@ const Sidebar = styled.aside<sidebarProps>`
   }
   ul li ul {
     transition: all 0.7s;
-    display: none;
+    display: ${({isShow}) => isShow ? 'block' : 'none'};
     list-style: none;
-  }
-  ul li:focus,
-  ul li:active,
-  ul li:hover > ul {
-    display: block;
   }
 
   ul li ul li {
@@ -72,13 +58,14 @@ const Sidebar = styled.aside<sidebarProps>`
     padding-left: 1rem;
   }
 
-  ul li:focus,
-  ul li:hover > div {
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
-    background-color: ${({ theme }) => theme.colors.gray};
-    p svg {
-      animation: ease-in-out 0.2s forwards ${rotate};
-    }
+  ul li .categories{
+    box-shadow: ${({isShow}) => isShow ?  '0px 3px 4px rgba(0, 0, 0, 0.25)' : 'none'};
+    background-color: ${({isShow, theme}) => isShow ?  theme.colors.gray : 'none'};
+  }
+
+  .arrow{
+    transition: .2s all;
+    transform: rotate(${({isShow}) => isShow ? `180deg` : '0deg'});
   }
 `;
 
@@ -97,13 +84,20 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
   history,
   setShow,
 }) => {
+
+  const [isShow, setIsShow] = useState(false);
+
   const handleInputSidebar = () => {
     if (!setShow) throw new Error('no setShow');
     setShow(false);
   };
 
+  const handleShow = () => {
+    setIsShow(!isShow);
+  }
+
   return (
-    <Sidebar show={show}>
+    <Sidebar show={show} isShow={isShow}>
       <ul>
         <Cross onClick={handleInputSidebar}>
           <ImCross></ImCross>
@@ -115,10 +109,10 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
             </div>
           </NavlinkAtom>
         </li>
-        <li>
-          <div>
+        <li onClick={handleShow}>
+          <div className="categories">
             <p>
-              Spots <AiFillCaretDown></AiFillCaretDown>
+              Spots <span className="arrow"><AiFillCaretDown></AiFillCaretDown></span>
             </p>
           </div>
           <ul>
