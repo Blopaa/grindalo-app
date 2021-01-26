@@ -26,6 +26,8 @@ const AuthInput = styled.input`
   padding-left: 1rem;
   margin: 1rem 0;
 
+  color: ${({ theme }) => theme.colors.secondary.base};
+
   &:focus,
   &:hover,
   &:active {

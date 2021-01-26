@@ -14,12 +14,11 @@ export const getSpots = async (token: string) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
-  } finally {
-    return res;
   }
+  return res;
 };
 
-export const getSpotById = async(token: string, id: string) => {
+export const getSpotById = async (token: string, id: string) => {
   let res;
   try {
     const { data, status } = await axios.get(
@@ -33,12 +32,11 @@ export const getSpotById = async(token: string, id: string) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
-  } finally {
-    return res;
   }
-}
+  return res;
+};
 
-export const getSpotByCategories = async(token: string, categorie: string) => {
+export const getSpotByCategories = async (token: string, categorie: string) => {
   let res;
   try {
     const { data, status } = await axios.get(
@@ -52,7 +50,6 @@ export const getSpotByCategories = async(token: string, categorie: string) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
-  } finally {
-    return res;
   }
-}
+  return res;
+};

@@ -77,6 +77,7 @@ const Cross = styled.button`
   background: none;
   border: none;
   outline: none;
+  color: ${({ theme }) => theme.colors.secondary.base};
 `;
 
 const SidebarMolecule: React.FC<sidebarProps> = ({
