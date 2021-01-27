@@ -14,8 +14,10 @@ export const getSpots = async (token: string) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
+  }finally{
+    console.clear()
+    return res;
   }
-  return res;
 };
 
 export const getSpotById = async (token: string, id: string) => {
@@ -32,8 +34,10 @@ export const getSpotById = async (token: string, id: string) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
+  }finally{
+    console.clear()
+    return res;
   }
-  return res;
 };
 
 export const getSpotByCategories = async (token: string, categorie: string) => {
@@ -50,6 +54,8 @@ export const getSpotByCategories = async (token: string, categorie: string) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
+  }finally{
+    console.clear()
+    return res;
   }
-  return res;
 };

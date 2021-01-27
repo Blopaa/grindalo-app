@@ -14,8 +14,10 @@ export const getLikedPost = async (token: string) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
+  }finally{
+    console.clear()
+    return res;
   }
-  return res;
 };
 
 export const giveLike = async (spotId: number, token: string) => {
@@ -32,6 +34,8 @@ export const giveLike = async (spotId: number, token: string) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
+  }finally{
+    console.clear()
+    return res;
   }
-  return res;
 };

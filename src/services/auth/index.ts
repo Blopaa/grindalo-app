@@ -12,8 +12,10 @@ export const signin = async (state: {}) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
+  }finally{
+    console.clear()
+    return res;
   }
-  return res;
 };
 
 export const signup = async (state: {}) => {
@@ -28,6 +30,8 @@ export const signup = async (state: {}) => {
     const { status } = err.response;
     const { message } = err.response.data;
     res = { status, message };
+  }finally{
+    console.clear()
+    return res;
   }
-  return res;
 };

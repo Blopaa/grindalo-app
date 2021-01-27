@@ -20,13 +20,16 @@ const Home = styled.div`
 const HomePage: React.FC<any> = (props) => {
   const [data, setData] = useState([]);
   const { state } = useContext(AuthContext);
-
+  const [error, setError] = useState(false)
   
   useEffect(() => {
     const getAllSpots = async () => {
       const spots = await getSpots(state.token);
       if (spots?.data) {
+        setError(false)
         setData(spots?.data);
+      }else{
+        setError(true)
       }
     };
     getAllSpots();
@@ -36,7 +39,7 @@ const HomePage: React.FC<any> = (props) => {
     <Home>
       <NavigationOrganism {...props} />
       <main>
-        {data.length > 0 ? data.map((e: spot) => (
+        {!error ? data.map((e: spot) => (
           <SpotCardMolecule
             id={e.id}
             name={e.title}
