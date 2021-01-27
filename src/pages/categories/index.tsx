@@ -27,6 +27,7 @@ const Categorie = styled.div`
 const CategoriePage: React.FC<CategoriePageProps> = ({ match, history }) => {
   const [data, setData] = useState([]);
   const { state } = useContext(AuthContext);
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     const getAllSpots = async () => {
@@ -35,7 +36,10 @@ const CategoriePage: React.FC<CategoriePageProps> = ({ match, history }) => {
         match.params.categorie
       );
       if (spots?.data) {
+        setError(false)
         setData(spots?.data);
+      }else{
+        setError(true)
       }
     };
     getAllSpots();
@@ -45,7 +49,7 @@ const CategoriePage: React.FC<CategoriePageProps> = ({ match, history }) => {
     <Categorie>
       <NavigationOrganism history={history} />
       <main>
-        {data.length > 0 ? data.map((e: spot) => (
+        {!error ? data.map((e: spot) => (
           <SpotCardMolecule
             id={e.id}
             name={e.title}
