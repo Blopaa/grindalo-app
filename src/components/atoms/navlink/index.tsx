@@ -6,6 +6,7 @@ type navlinkProps = {
   href: string;
   children?: React.ReactChild;
   history: any;
+  onClick?: () => void
 };
 
 const StyledLink = styled.div<navlinkProps>`
@@ -21,9 +22,9 @@ const StyledLink = styled.div<navlinkProps>`
   height: 3.125rem;
 `;
 
-const NavlinkAtom: React.FC<navlinkProps> = ({ href, children, history }) => {
+const NavlinkAtom: React.FC<navlinkProps> = ({ href, children, history, onClick }) => {
   return (
-    <Link to={href}>
+    <Link to={href} onClick={onClick}>
       <StyledLink history={history} href={href}>
         {children}
       </StyledLink>

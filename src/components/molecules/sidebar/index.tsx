@@ -8,7 +8,7 @@ type sidebarProps = {
   show: boolean;
   setShow?: React.Dispatch<React.SetStateAction<boolean>>;
   history?: History;
-  isShow?: boolean; 
+  isShow?: boolean;
 };
 
 const Sidebar = styled.aside<sidebarProps>`
@@ -32,7 +32,7 @@ const Sidebar = styled.aside<sidebarProps>`
   }
   ul li ul {
     transition: all 0.7s;
-    display: ${({isShow}) => isShow ? 'block' : 'none'};
+    display: ${({ isShow }) => (isShow ? 'block' : 'none')};
     list-style: none;
   }
 
@@ -58,14 +58,16 @@ const Sidebar = styled.aside<sidebarProps>`
     padding-left: 1rem;
   }
 
-  ul li .categories{
-    box-shadow: ${({isShow}) => isShow ?  '0px 3px 4px rgba(0, 0, 0, 0.25)' : 'none'};
-    background-color: ${({isShow, theme}) => isShow ?  theme.colors.gray : 'none'};
+  ul li .categories {
+    box-shadow: ${({ isShow }) =>
+      isShow ? '0px 3px 4px rgba(0, 0, 0, 0.25)' : 'none'};
+    background-color: ${({ isShow, theme }) =>
+      isShow ? theme.colors.gray : 'none'};
   }
 
-  .arrow{
-    transition: .2s all;
-    transform: rotate(${({isShow}) => isShow ? `180deg` : '0deg'});
+  .arrow {
+    transition: 0.2s all;
+    transform: rotate(${({ isShow }) => (isShow ? `180deg` : '0deg')});
   }
 `;
 
@@ -85,7 +87,6 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
   history,
   setShow,
 }) => {
-
   const [isShow, setIsShow] = useState(false);
 
   const handleInputSidebar = () => {
@@ -95,7 +96,7 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
 
   const handleShow = () => {
     setIsShow(!isShow);
-  }
+  };
 
   return (
     <Sidebar show={show} isShow={isShow}>
@@ -103,37 +104,56 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
         <Cross onClick={handleInputSidebar}>
           <ImCross></ImCross>
         </Cross>
-        <li style={{textAlign: 'left'}}>
+        <li style={{ textAlign: 'left' }}>
           <NavlinkAtom href="/home" history={history}>
-            <div  style={{width: '100%'}}>
-              <p style={{width: '100%'}}>Home</p>
+            <div style={{ width: '100%' }}>
+              <p style={{ width: '100%' }}>Home</p>
             </div>
           </NavlinkAtom>
         </li>
         <li onClick={handleShow}>
           <div className="categories">
             <p>
-              Spots <span className="arrow"><AiFillCaretDown></AiFillCaretDown></span>
+              Spots{' '}
+              <span className="arrow">
+                <AiFillCaretDown></AiFillCaretDown>
+              </span>
             </p>
           </div>
           <ul>
             <li>
-              <NavlinkAtom href="/spots/grind" history={history}>
+              <NavlinkAtom
+                href="/spots/grind"
+                history={history}
+                onClick={handleInputSidebar}
+              >
                 Grinds
               </NavlinkAtom>
             </li>
             <li>
-              <NavlinkAtom href="/spots/escaleras" history={history}>
+              <NavlinkAtom
+                href="/spots/escaleras"
+                history={history}
+                onClick={handleInputSidebar}
+              >
                 Escaleras
               </NavlinkAtom>
             </li>
             <li>
-              <NavlinkAtom href="/spots/flat" history={history}>
+              <NavlinkAtom
+                href="/spots/flat"
+                history={history}
+                onClick={handleInputSidebar}
+              >
                 Flat tricks
               </NavlinkAtom>
             </li>
             <li>
-              <NavlinkAtom href="/spots/cruising" history={history}>
+              <NavlinkAtom
+                href="/spots/cruising"
+                history={history}
+                onClick={handleInputSidebar}
+              >
                 Just cruising
               </NavlinkAtom>
             </li>
