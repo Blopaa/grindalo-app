@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import NavlinkAtom from '../../atoms/navlink';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { ImCross } from 'react-icons/im';
+import { keyframes } from '@emotion/react';
 
 type sidebarProps = {
   show: boolean;
@@ -12,6 +13,7 @@ type sidebarProps = {
 };
 
 const Sidebar = styled.aside<sidebarProps>`
+  z-index: 11;
   a {
     text-decoration: none;
     color: ${({ theme }) => theme.colors.secondary.base};
@@ -25,8 +27,8 @@ const Sidebar = styled.aside<sidebarProps>`
   color: #303030;
   font-family: sans-serif;
   font-weight: bold;
-  transition: ease-in-out 0.2s;
-
+  transition: all ease-in-out 0.4s;
+  opacity: ${({ show }) => (!show ? '0' : '1')};
   ul li {
     list-style: none;
   }
@@ -38,15 +40,11 @@ const Sidebar = styled.aside<sidebarProps>`
 
   ul li ul li {
     text-align: left;
-  }
-
-  ul li ul li {
     transition: 0.2s all;
-  }
-
-  ul li ul li:hover {
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
-    background-color: ${({ theme }) => theme.colors.gray};
+    &:hover {
+      box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+      background-color: ${({ theme }) => theme.colors.gray};
+    }
   }
 
   ul li div p {
@@ -70,6 +68,14 @@ const Sidebar = styled.aside<sidebarProps>`
     transform: rotate(${({ isShow }) => (isShow ? `180deg` : '0deg')});
   }
 `;
+
+const Background = styled.div<sidebarProps>`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: ${({show}) => !show ? "none" : "block"};
+`
 
 const Cross = styled.button`
   font-size: 1.5rem;
@@ -99,68 +105,71 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
   };
 
   return (
-    <Sidebar show={show} isShow={isShow}>
-      <ul>
-        <Cross onClick={handleInputSidebar}>
-          <ImCross></ImCross>
-        </Cross>
-        <li style={{ textAlign: 'left' }}>
-          <NavlinkAtom href="/home" history={history}>
-            <div style={{ width: '100%' }}>
-              <p style={{ width: '100%' }}>Home</p>
+    <>
+      <Background show={show} onClick={handleInputSidebar}></Background>
+      <Sidebar show={show} isShow={isShow}>
+        <ul>
+          <Cross onClick={handleInputSidebar}>
+            <ImCross></ImCross>
+          </Cross>
+          <li style={{ textAlign: 'left' }}>
+            <NavlinkAtom href="/home" history={history}>
+              <div style={{ width: '100%' }}>
+                <p style={{ width: '100%' }}>Home</p>
+              </div>
+            </NavlinkAtom>
+          </li>
+          <li onClick={handleShow}>
+            <div className="categories">
+              <p>
+                Spots{' '}
+                <span className="arrow">
+                  <AiFillCaretDown></AiFillCaretDown>
+                </span>
+              </p>
             </div>
-          </NavlinkAtom>
-        </li>
-        <li onClick={handleShow}>
-          <div className="categories">
-            <p>
-              Spots{' '}
-              <span className="arrow">
-                <AiFillCaretDown></AiFillCaretDown>
-              </span>
-            </p>
-          </div>
-          <ul>
-            <li>
-              <NavlinkAtom
-                href="/spots/grind"
-                history={history}
-                onClick={handleInputSidebar}
-              >
-                Grinds
-              </NavlinkAtom>
-            </li>
-            <li>
-              <NavlinkAtom
-                href="/spots/escaleras"
-                history={history}
-                onClick={handleInputSidebar}
-              >
-                Escaleras
-              </NavlinkAtom>
-            </li>
-            <li>
-              <NavlinkAtom
-                href="/spots/flat"
-                history={history}
-                onClick={handleInputSidebar}
-              >
-                Flat tricks
-              </NavlinkAtom>
-            </li>
-            <li>
-              <NavlinkAtom
-                href="/spots/cruising"
-                history={history}
-                onClick={handleInputSidebar}
-              >
-                Just cruising
-              </NavlinkAtom>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </Sidebar>
+            <ul>
+              <li>
+                <NavlinkAtom
+                  href="/spots/grind"
+                  history={history}
+                  onClick={handleInputSidebar}
+                >
+                  Grinds
+                </NavlinkAtom>
+              </li>
+              <li>
+                <NavlinkAtom
+                  href="/spots/escaleras"
+                  history={history}
+                  onClick={handleInputSidebar}
+                >
+                  Escaleras
+                </NavlinkAtom>
+              </li>
+              <li>
+                <NavlinkAtom
+                  href="/spots/flat"
+                  history={history}
+                  onClick={handleInputSidebar}
+                >
+                  Flat tricks
+                </NavlinkAtom>
+              </li>
+              <li>
+                <NavlinkAtom
+                  href="/spots/cruising"
+                  history={history}
+                  onClick={handleInputSidebar}
+                >
+                  Just cruising
+                </NavlinkAtom>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </Sidebar>
+    </>
   );
 };
 
