@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, { useContext, useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { spot } from '../../../@types/types';
+import LoadingAtom from '../../components/atoms/loading';
 import NotSpotFoundMolecule from '../../components/molecules/noSpotFound';
 import SpotCardMolecule from '../../components/molecules/spotCard';
 import NavigationOrganism from '../../components/organims/navigation';
@@ -27,19 +28,23 @@ const Categorie = styled.div`
 const CategoriePage: React.FC<CategoriePageProps> = ({ match, history }) => {
   const [data, setData] = useState([]);
   const { state } = useContext(AuthContext);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const getAllSpots = async () => {
       const spots = await getSpotByCategories(
         state.token,
         match.params.categorie
       );
       if (spots?.data) {
-        setError(false)
+        setError(false);
         setData(spots?.data);
-      }else{
-        setError(true)
+        setLoading(false);
+      } else {
+        setLoading(false);
+        setError(true);
       }
     };
     getAllSpots();
@@ -48,16 +53,24 @@ const CategoriePage: React.FC<CategoriePageProps> = ({ match, history }) => {
   return (
     <Categorie>
       <NavigationOrganism history={history} />
-      <main>
-        {!error ? data.map((e: spot) => (
-          <SpotCardMolecule
-            id={e.id}
-            name={e.title}
-            imgurl={e.imgs[0]}
-            key={e.id}
-          ></SpotCardMolecule>
-        )) : <NotSpotFoundMolecule/>}
-      </main>
+      {loading ? (
+        <LoadingAtom />
+      ) : (
+        <main>
+          {!error ? (
+            data.map((e: spot) => (
+              <SpotCardMolecule
+                id={e.id}
+                name={e.title}
+                imgurl={e.imgs[0]}
+                key={e.id}
+              ></SpotCardMolecule>
+            ))
+          ) : (
+            <NotSpotFoundMolecule />
+          )}
+        </main>
+      )}
     </Categorie>
   );
 };
