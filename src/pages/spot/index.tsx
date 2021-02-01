@@ -10,6 +10,7 @@ import { getSpotById } from '../../services/spot';
 import { FaArrowLeft } from 'react-icons/fa';
 import { ReactComponent as Lemon } from '../../assets/icons/lemon.svg';
 import { getLikedPost, giveLike } from '../../services/user';
+import LoadingAtom from '../../components/atoms/loading';
 
 interface SpotPageProps
   extends RouteComponentProps<{
@@ -57,7 +58,7 @@ const Header = styled.div<styleProps>`
       isLiked ? theme.colors.primary : theme.colors.white};
     stroke: ${({ isLiked, theme }) =>
       !isLiked ? theme.colors.secondary.base : theme.colors.white};
-      transition: all .2s;
+    transition: all 0.2s;
   }
 `;
 
@@ -73,6 +74,7 @@ const SpotPage: React.FC<SpotPageProps> = ({ match }) => {
   const { state } = useContext(AuthContext);
   const [likedOnes, setLikedOnes] = useState([]);
   const [isLiked, setIsLiked] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -81,6 +83,7 @@ const SpotPage: React.FC<SpotPageProps> = ({ match }) => {
       const spot = await getSpotById(state.token, match.params.id);
       if (spot?.data) {
         setspot(spot.data);
+        setLoading(false);
       }
     };
     getSpot();
@@ -116,40 +119,49 @@ const SpotPage: React.FC<SpotPageProps> = ({ match }) => {
   };
 
   return (
-    <Spot>
-      <Link to="/home" style={{ paddingLeft: '1rem', fontSize: '2rem', color: '#303030' }}>
-        <FaArrowLeft></FaArrowLeft>
-      </Link>
-      <MainImg src={spot.imgs[0]} alt="main image" />
-      <Header isLiked={isLiked}>
-        <h2>{spot.title}</h2> <Lemon onClick={handleLike}/>
-      </Header>
-      <p>{spot.description}</p>
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          justifyContent: 'center',
-          padding: '1rem 0',
-        }}
-      >
-        <ButtonAtom
-          buttonType="button"
-          border="5px"
-          href="#"
-          bgColor="#303030"
-          fColor="#FCC21B"
-          buttonDesign="outline"
-          width="15rem"
-          height="5rem"
-        >
-          ¿Donde esta este spot?
-        </ButtonAtom>
-      </div>
-      {spot.imgs.map((e, i) => (
-        <img width="100%" src={e} alt="spot Img" key={i} />
-      ))}
-    </Spot>
+    <>
+      {loading ? (
+        <LoadingAtom />
+      ) : (
+        <Spot>
+          <Link
+            to="/home"
+            style={{ paddingLeft: '1rem', fontSize: '2rem', color: '#303030' }}
+          >
+            <FaArrowLeft></FaArrowLeft>
+          </Link>
+          <MainImg src={spot.imgs[0]} alt="main image" />
+          <Header isLiked={isLiked}>
+            <h2>{spot.title}</h2> <Lemon onClick={handleLike} />
+          </Header>
+          <p>{spot.description}</p>
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              justifyContent: 'center',
+              padding: '1rem 0',
+            }}
+          >
+            <ButtonAtom
+              buttonType="button"
+              border="5px"
+              href="#"
+              bgColor="#303030"
+              fColor="#FCC21B"
+              buttonDesign="outline"
+              width="15rem"
+              height="5rem"
+            >
+              ¿Donde esta este spot?
+            </ButtonAtom>
+          </div>
+          {spot.imgs.map((e, i) => (
+            <img width="100%" src={e} alt="spot Img" key={i} />
+          ))}
+        </Spot>
+      )}
+    </>
   );
 };
 
