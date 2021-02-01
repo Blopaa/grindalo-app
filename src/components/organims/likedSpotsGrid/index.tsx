@@ -8,7 +8,7 @@ const LikedSpotsGrid = styled.div`
   width: calc(100%-3px);
   height: 100%;
   grid-template-columns: 1fr 1fr;
-  grid-auto-flow: row dense;
+  grid-auto-rows: 11.25rem;
   grid-gap: 1px;
   padding: 1px;
 `;

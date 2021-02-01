@@ -23,22 +23,20 @@ const HomePage: React.FC<any> = (props) => {
   const [data, setData] = useState([]);
   const { state } = useContext(AuthContext);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
     const getAllSpots = async () => {
       const spots = await getSpots(state.token);
       if (spots?.data) {
-        setLoading(false);
         setError(false);
         setData(spots?.data);
       } else {
-        setLoading(false);
         setError(true);
       }
     };
     getAllSpots();
+    setLoading(false);
   }, [state.token]);
 
   return (

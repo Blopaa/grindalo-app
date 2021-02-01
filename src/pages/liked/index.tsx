@@ -1,14 +1,10 @@
 import styled from '@emotion/styled';
 import React, { useContext, useEffect, useState } from 'react';
-import { spot } from '../../../@types/types';
 import LoadingAtom from '../../components/atoms/loading';
-import LikedSpotCardMolecule from '../../components/molecules/likedSpotCard';
 import NotSpotFoundMolecule from '../../components/molecules/noSpotFound';
-import SpotCardMolecule from '../../components/molecules/spotCard';
 import LikedSpotsGridOrganism from '../../components/organims/likedSpotsGrid';
 import NavigationOrganism from '../../components/organims/navigation';
 import { AuthContext } from '../../contexts';
-import { getSpots } from '../../services/spot';
 import { getUserLikedSpots } from '../../services/user';
 
 const Liked = styled.div`
