@@ -167,6 +167,13 @@ const SidebarMolecule: React.FC<sidebarProps> = ({
               </li>
             </ul>
           </li>
+          <li style={{ textAlign: 'left' }}>
+            <NavlinkAtom href="/likedSpots" history={history}>
+              <div style={{ width: '100%' }}>
+                <p style={{ width: '100%' }}>liked</p>
+              </div>
+            </NavlinkAtom>
+          </li>
         </ul>
       </Sidebar>
     </>

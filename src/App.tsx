@@ -12,6 +12,7 @@ import { AuthContext } from './contexts';
 import HomePage from './pages/home';
 import SpotPage from './pages/spot';
 import CategoriePage from './pages/categories';
+import LikedPage from './pages/liked';
 export interface initialAuthState {
   token: string | null;
   logged: boolean;
@@ -38,14 +39,45 @@ const App = () => {
         <AuthContext.Provider value={{ state, dispatch }}>
           <IonRouterOutlet>
             <IonReactRouter>
-              <Route path="/home/:id" exact={true} component={SpotPage} />
-              <Route path="/spots/:categorie" exact={true} component={CategoriePage} />
               <Route
                 exact
                 path="/home"
                 render={(props) =>
                   logged.logged && logged.token ? (
                     <HomePage {...props} />
+                  ) : (
+                    <Redirect from="/" to="/signin" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/home/:id"
+                render={(props) =>
+                  logged.logged && logged.token ? (
+                    <SpotPage {...props} />
+                  ) : (
+                    <Redirect from="/" to="/signin" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/spots/:categorie"
+                render={(props) =>
+                  logged.logged && logged.token ? (
+                    <CategoriePage {...props} />
+                  ) : (
+                    <Redirect from="/" to="/signin" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/likedSpots"
+                render={(props) =>
+                  logged.logged && logged.token ? (
+                    <LikedPage {...props} />
                   ) : (
                     <Redirect from="/" to="/signin" />
                   )
